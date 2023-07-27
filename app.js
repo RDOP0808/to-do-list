@@ -1,16 +1,24 @@
 // app.js
 
-function createList() {
-    var newListName = document.getElementById("new-list-input").value;
-    var newList = document.createElement("li");
-    newList.innerText = newListName;
-    document.getElementById("todo-list").appendChild(newList);
-}
-
 function addItem() {
     var newItemName = document.getElementById("new-item-input").value;
     var newItem = document.createElement("li");
     newItem.innerText = newItemName;
+
+    // Add a delete button to each item
+    var deleteButton = document.createElement("button");
+    deleteButton.innerText = "done";
+    deleteButton.onclick = function() {
+        deleteItem(this);
+    };
+    newItem.appendChild(deleteButton);
+
+
     document.getElementById("todo-list").appendChild(newItem);
     document.getElementById("new-item-input").value = "";
+}
+
+function deleteItem(item) {
+    var listItem = item.parentElement;
+    listItem.remove();
 }
